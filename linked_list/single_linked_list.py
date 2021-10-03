@@ -25,6 +25,52 @@ class LinkedList:
 
         itr.next_node = Node(data, None)
 
+    def __len__(self):
+        ''' len(1 ---> 2 ---> 4 ---> None) == 3
+        '''
+        counter = 0
+        itr = self.head
+        while itr:  
+            itr = itr.next_node
+            counter += 1
+
+        return counter
+
+    def remove_at_index(self, index):
+        if index < 0 or index > self.__len__():
+            raise Exception('Not a valid index')
+        elif index == 0:
+            self.head = self.head.next_node
+            return
+        
+        counter = 0
+        itr = self.head
+        while itr:
+            if counter == index - 1:
+                itr.next_node = itr.next_node.next_node
+                break
+            itr = itr.next_node
+            counter += 1
+
+    def insert_at_index(self, index, data):
+        if index < 0 or index > self.__len__():
+            raise Exception('Not a valid index')
+        elif index == 0:
+            self.insert_at_beginning(data)
+            return
+        elif index == self.__len__():
+            self.insert_at_end()
+            return
+        
+        counter = 0
+        itr = self.head
+        while itr:
+            if counter == index - 1:
+                itr.next_node = Node(data, itr.next_node.next_node)
+                break
+            
+            itr = itr.next_node
+            counter += 1
 
     def __repr__(self):
         """ Beginning- left side
@@ -39,16 +85,25 @@ class LinkedList:
 
         return linked_list + 'None'
 
+
 x = LinkedList()
 x.insert_at_end(19)
 x.insert_at_beginning(5)
 x.insert_at_beginning(17)
 x.insert_at_end(500)
+print(x)
 x.insert_at_beginning(33)
 x.insert_at_beginning(2)
 x.insert_at_end(7)
 x.insert_at_beginning(87)
 
 print(x)
-
+x.remove_at_index(2)
+print(x)
+x.remove_at_index(0)
+print(x)
+print(x.__len__())
+print(len(x))
+x.insert_at_index(2, 1028)
 # work in progress
+print(x)
