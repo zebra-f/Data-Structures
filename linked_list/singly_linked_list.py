@@ -100,12 +100,12 @@ class LinkedList:
             itr = itr.next_node
 
     def reverse(self):
-        length = self.__len__()
-
-        itr = self.head
-        for i in range(length):
-            self.insert_at_beginning(itr.data)
-            itr = itr.next_node
+        initial_head_node = self.head
+        self.head = None
+        while initial_head_node:
+            self.insert_at_beginning(initial_head_node.data)
+            
+            initial_head_node = initial_head_node.next_node
 
     def __repr__(self):
         """ Beginning- left side
@@ -121,17 +121,4 @@ class LinkedList:
         return linked_list + 'None'
 
 
-# work in progress 
-x = LinkedList()
-x.insert_at_beginning(2)
-x.insert_at_beginning(4)
-x.insert_at_beginning(6)
-x.insert_at_end(8)
-
-print(x)
-x.remove_at_data(6)
-print(x)
-print(len(x))
-print(x)
-x.reverse()
-print(x)
+# ll = LinkedList()
