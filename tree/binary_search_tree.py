@@ -1,5 +1,6 @@
 class BinarySearchTree:
 
+    # Node
     def __init__(self, data):
         self.data = data
         self.left = None
@@ -23,17 +24,33 @@ class BinarySearchTree:
 
     def in_order_traversal(self):
         '''returns an ordered list of all nodes in a binary tree'''
-        nodes = []
+        bst_data = []
 
         if self.left:
-            nodes += self.left.in_order_traversal()
+            bst_data += self.left.in_order_traversal()
         
-        nodes.append(self.data)
+        bst_data.append(self.data)
 
         if self.right:
-            nodes += self.right.in_order_traversal()
+            bst_data += self.right.in_order_traversal()
 
-        return nodes
+        return bst_data
+
+    def level_traversal(self):
+        bst_data = []
+
+        queue = [self]  # queue data structure
+        while len(queue) > 0:
+            bst_data.append(queue[-1].data)
+            
+            if queue[-1].left:
+                queue.insert(0, queue[-1].left)
+            if queue[-1].right:
+                queue.insert(0, queue[-1].right)
+
+            queue.pop()
+        
+        return bst_data
 
 
 h = BinarySearchTree(14)
@@ -45,3 +62,4 @@ h.add_child(5)
 h.add_child(56)
 
 print(h.in_order_traversal())
+print(h.level_traversal())
