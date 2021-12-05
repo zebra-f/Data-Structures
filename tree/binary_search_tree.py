@@ -51,6 +51,21 @@ class BinarySearchTree:
         
         return bst_data
 
+    def post_order_traversal(self):
+        bst_data = []
+        
+        stack = [self]  # stack data structure, depth first search
+        while len(stack) > 0:
+            bst_data.append(stack[-1].data)
+            
+            temp = stack.pop()
+            if temp.left:
+                stack.append(temp.left)
+            if temp.right:
+                stack.append(temp.right)
+        
+        return bst_data[::-1]
+
     def level_order_traversal(self):
         bst_data = []
 
@@ -84,3 +99,4 @@ h.add_child(23)
 print(h.in_order_traversal())
 print(h.level_order_traversal())
 print(h.pre_order_traversal())
+print(h.post_order_traversal())
