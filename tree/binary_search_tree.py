@@ -22,6 +22,16 @@ class BinarySearchTree:
             else:
                 self.right = BinarySearchTree(data)
 
+    def search(self, data):
+        if self.data == data:
+            return True
+        elif data > self.data and self.right:
+            return self.right.search(data)
+        elif data < self.data and self.left:
+            return self.left.search(data)
+        else:
+            return False
+
     def in_order_traversal(self):
         '''returns an ordered list of all nodes in a binary tree'''
         bst_data = []
@@ -100,3 +110,5 @@ print(h.in_order_traversal())
 print(h.level_order_traversal())
 print(h.pre_order_traversal())
 print(h.post_order_traversal())
+
+print(h.search(88))
