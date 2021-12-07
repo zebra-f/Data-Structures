@@ -32,6 +32,40 @@ class BinarySearchTree:
         else:
             return False
 
+    def min_value(self):
+        if self.left:
+            return self.left.min_value()
+        else:
+            return self.data
+    
+    def max_value(self):
+        if self.right:
+            return self.right.max_value()
+        else:
+            return self.data
+
+    def delete(self, data):
+        if data < self.data:
+            if self.left:
+                self.left.delete(data)
+        elif data > self.data:
+            if self.right:
+                self.right.delete(data)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            elif self.left is None:
+                return self.right
+            elif self.right is None:
+                return self.left
+
+            min_value = self.right.min_value()
+            self.data = min_value
+            self.right = self.right.delete(min_value)
+
+        return self
+
+
     def in_order_traversal(self):
         '''returns an ordered list of all nodes in a binary tree'''
         bst_data = []
@@ -111,4 +145,11 @@ print(h.level_order_traversal())
 print(h.pre_order_traversal())
 print(h.post_order_traversal())
 
-print(h.search(88))
+print(h.search(13))
+print(h.search(23))
+
+print(h.min_value())
+print(h.max_value())
+
+print(h.delete(27))
+print(h.level_order_traversal())
